@@ -1,17 +1,20 @@
 <script>
-  import Terminal from './Terminal.svelte';
+  import { Router, Link, Route, navigate } from 'svelte-routing';
   import { onMount } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
 
-  let command;
-  let task;
-  let callback;
-  onMount(() => {
-  });
+  import Home from './routes/Home.svelte';
+  import Init from './routes/Init.svelte';
+  import Dev from './routes/Dev.svelte';
+  import Build from './routes/Build.svelte';
+  import NewProject from './routes/NewProject.svelte';
+
+  export let url;
 
   function runDev() {
     console.log('snowpack dev');
   }
-
+ 
   function runBuild() {
     console.log('snowpack build');
     command = 'npm run';
@@ -22,51 +25,29 @@
       });
   }
 
+  onMount(() => {
+fetch('/project').then(res => res.json())
+      .then(response => {
+        console.log(response);
+        if(response.projectPath) {
+        } else {
+          navigate('/new-project', { replace: true });
+        }
+      });
+
+  });
+
 </script>
 
-<div class="grid-wrapper">
-  <nav>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/init">Init</a></li>
-      <li><a href="/dev">Dev</a></li>
-      <li><a href="/build">Build</a></li>
-    </ul>
-  </nav>
-<main>
-  <h1>Snowpack UI </h1>
-  <p>
-  <button type="button" on:click={runDev}>snowpack dev</button>
-  <button type="button" on:click={runBuild}>snowpack build</button>
-  </p>
-  <Terminal command={command} task={task} callback={callback}/>
-
-</main>
-</div>
+  <Router url="{url}">
+    <div>
+    <Route path="init" component="{Init}" />
+    <Route path="dev" component="{Dev}" />
+    <Route path="build" component="{Build}" />
+    <Route path="new-project" component="{NewProject}" />
+    <Route path="/"><Home /></Route>
+  </div>
+</Router>
 
 <style>
-  .grid-wrapper {
-    display: grid;
-    grid-template-columns: 200px 1fr
-  }
-
-  main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
-
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 2em;
-    font-weight: 100;
-  }
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
-  }
 </style>

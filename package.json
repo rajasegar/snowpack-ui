@@ -27,6 +27,7 @@
     "npm-check-updates": "^10.2.5",
     "resolve": "^1.19.0",
     "sirv-cli": "^1.0.0",
+    "svelte-routing": "^1.5.0",
     "walk-sync": "^2.2.0",
     "xterm": "^4.9.0",
     "xterm-addon-attach": "^0.6.0",

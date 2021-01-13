@@ -9,6 +9,7 @@ dependencies:
   npm-check-updates: 10.2.5
   resolve: 1.19.0
   sirv-cli: 1.0.10
+  svelte-routing: 1.5.0_svelte@3.31.2
   walk-sync: 2.2.0
   xterm: 4.9.0
   xterm-addon-attach: 0.6.0_xterm@4.9.0
@@ -2873,6 +2874,14 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==
+  /svelte-routing/1.5.0_svelte@3.31.2:
+    dependencies:
+      svelte: 3.31.2
+    dev: false
+    peerDependencies:
+      svelte: ^3.20.x
+    resolution:
+      integrity: sha512-4ftcSO2x5kzCUWQKm9Td6/C+t7lRjMEo72utRO0liS/aWZuRwAXOBl3y+hWZw8tV+DTGElqaAAyi44AuWXcVBg==
   /svelte/3.31.2:
     dev: true
     engines:
@@ -3192,6 +3201,7 @@ specifiers:
   rollup-plugin-terser: ^7.0.0
   sirv-cli: ^1.0.0
   svelte: ^3.0.0
+  svelte-routing: ^1.5.0
   walk-sync: ^2.2.0
   xterm: ^4.9.0
   xterm-addon-attach: ^0.6.0

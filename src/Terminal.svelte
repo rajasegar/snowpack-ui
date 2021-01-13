@@ -6,9 +6,8 @@
 
   import 'xterm/css/xterm.css';
 
-  export let command;
   export let task;
-  export let callback;
+  export let callback = () => {};
 
   let term;
   let pid;
@@ -56,10 +55,7 @@
             term._initialized = true;
           };
           socket.onmessage = (event) => {
-            /*console.log(event);*/
-            /*if(this.args.named.callback) {*/
-            /*this.args.named.callback(event);*/
-            /*}*/
+            callback(event);
           }
           socket.onclose = () => {};
           socket.onerror = () => {};
@@ -68,9 +64,13 @@
     }, 0);
   });
 
+  export function execute(command) {
+    socket.send(command);
+  }
+
 </script>
 
-  <div id="terminal"></div>
+<div id="terminal"></div>
 
 <style>
 </style>

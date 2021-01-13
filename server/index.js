@@ -132,8 +132,8 @@ function startServer(projectPath) {
         encoding:  'utf8'
       });
 
-      term.write('clear\r');
-      term.write('pwd\r');
+      //term.write('clear\r');
+      //term.write('pwd\r');
 
       console.log('Created terminalwith PID: ' + term.pid);
 
