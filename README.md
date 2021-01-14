@@ -1,4 +1,6 @@
 # Snowpack-ui
+[![npm version](http://img.shields.io/npm/v/snowpack-ui.svg?style=flat)](https://npmjs.org/package/snowpack-ui "View this project on npm")
+
 
 Run & Manage [Snowpack](https://snowpack.dev) projects from the browser instead of the terminal. 
 
