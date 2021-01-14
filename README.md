@@ -34,6 +34,21 @@ otherwise you can run tasks and manage an existing Snowpack project.
 ### Project created
 ![project created](screenshots/project-created.png)
 
+### Build Project
+![build project](screenshots/build-project.png)
+
+### Dev Server
+![dev server](screenshots/dev-server.png)
+
+### Install dependencies
+![install deps](screenshots/install-deps.png)
+
+### Project home
+![project home](screenshots/project-home.png)
+
+### Project tasks
+![project tasks](screenshots/project-tasks.png)
+
 ## Things to do
 - Save app templates as default
 - Manage Snowpack config
