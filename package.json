@@ -4,7 +4,8 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public"
+    "start": "sirv public",
+    "deploy": "npm run build && git push && git push --tags && npm publish"
   },
   "bin": {
     "snowpack-ui": "./bin/cli.js"
