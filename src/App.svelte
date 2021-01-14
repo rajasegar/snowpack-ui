@@ -26,7 +26,7 @@
   }
 
   onMount(() => {
-fetch('/project').then(res => res.json())
+    fetch('/project').then(res => res.json())
       .then(response => {
         console.log(response);
         if(response.projectPath) {

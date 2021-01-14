@@ -88,6 +88,7 @@
   }
 </script>
 
+<div class="new-page">
 <h1>Create New Snowpack Project</h1>
 <div class="grid-wrapper">
   <div class="left-col">
@@ -114,22 +115,36 @@
   </select>
   </p>
   <p>
-  <button type="button" on:click={createProject}>Create Project</button>
+  <button type="button" class="button-primary" on:click={createProject}>Create Project</button>
   </p>
 </form>
     {:else}
 
-  <button type="button" on:click={gotoProject}>Take me to Project page</button>
+  <button type="button" class="button-primary" on:click={gotoProject}>Take me to Project page</button>
     {/if}
   </div>
   <div class="right-col">
     <Terminal task="new-project" bind:this={term} callback={projectCreated}/>
   </div>
 </div>
+</div>
 
 <style>
+   .new-page {
+    background: var(--light-blue);
+    padding: 1em;
+    height: 100vh;
+   }
   .grid-wrapper {
     display: grid;
     grid-template-columns: 300px 1fr;
+  }
+
+  .left-col {
+    padding: 1em;
+  }
+
+  .right-col {
+    padding: 1em;
   }
 </style>

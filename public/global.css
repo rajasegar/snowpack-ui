@@ -3,59 +3,99 @@
   padding: 0;
   border: none;
 }
+
+:root {
+  --light-blue: rgba(42,133,202,0.25098);
+}
+
 html, body {
-	position: relative;
-	width: 100%;
-	height: 100%;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 body {
-	color: #333;
-	margin: 0;
-	box-sizing: border-box;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #333;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 
+p {
+  margin: 0.5em;
+}
 
 a:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 
 label {
-	display: block;
+  display: block;
+}
+
+li {
+  list-style: none;
 }
 
 input, button, select, textarea {
-	font-family: inherit;
-	font-size: inherit;
-	-webkit-padding: 0.4em 0;
-	padding: 0.4em;
-	margin: 0 0 0.5em 0;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
+  font-family: inherit;
+  font-size: inherit;
+  -webkit-padding: 0.4em 0;
+  padding: 0.4em;
+  margin: 0 0 0.5em 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  width: 90%;
+}
+
+select {
+  background: #fff;
 }
 
 input:disabled {
-	color: #ccc;
+  color: #ccc;
 }
 
 button {
-	color: #333;
-	background-color: #f4f4f4;
-	outline: none;
+  color: #333;
+  background-color: #f4f4f4;
+  outline: none;
+      border: 1px solid #666;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-primary {
+    color: #fff;
+    background: linear-gradient(45deg, #24bf62, #267dd6, #b224d0);
 }
 
 button:disabled {
-	color: #999;
+  color: #999;
 }
 
 button:not(:disabled):active {
-	background-color: #ddd;
+  background-color: #ddd;
 }
 
 button:focus {
-	border-color: #666;
+  border-color: #666;
 }
+
+.layout-grid {
+  display:grid;
+  grid-template-columns: 200px 1fr;
+  height:100vh;
+}
+
+main {
+    padding: 1em;
+    background: rgba(42,133,202,0.25098);
+    background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512' title='mountain' class='logo' fill='%23FFFB'%3E%3Cpath d='M634.92 462.7l-288-448C341.03 5.54 330.89 0 320 0s-21.03 5.54-26.92 14.7l-288 448a32.001 32.001 0 0 0-1.17 32.64A32.004 32.004 0 0 0 32 512h576c11.71 0 22.48-6.39 28.09-16.67a31.983 31.983 0 0 0-1.17-32.63zM320 91.18L405.39 224H320l-64 64-38.06-38.06L320 91.18z' /%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: calc(100% + 100px) calc(100% + 64px);
+    background-size: 50%
+  }

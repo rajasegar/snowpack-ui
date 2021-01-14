@@ -2,6 +2,14 @@
   import { link } from 'svelte-routing';
 </script>
 <nav class="navbar">
+  <div class="logo-wrapper">
+  <svg class="snow-logo-icon" viewBox="0 0 640 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <g transform="translate(-1.000000, 0.000000)" fill-rule="nonzero">
+        <path d="M635.92,462.7 L347.92,14.7 C342.03,5.54 331.89,0 321,0 C310.11,0 299.97,5.54 294.08,14.7 L6.08,462.7 C-0.250773249,472.547007 -0.699487627,485.064987 4.91,495.34 C10.522069,505.612419 21.2945349,512 33,512 L609,512 C620.71,512 631.48,505.61 637.09,495.33 C642.699457,485.058495 642.250708,472.543372 635.92,462.7 Z M321,91.18 L406.39,224 L321,224 L257,288 L218.94,249.94 L321,91.18 Z" id="Shape"></path>
+      </g>
+    </svg>
+  <span>Snowpack-UI</span>
+  </div>
     <ul>
       <li><a use:link  href="/">Home</a></li>
       <li><a use:link href="/init">Init</a></li>
@@ -12,11 +20,31 @@
 
 
 <style>
-  .navbar {
-    background: #2e5e82;
-    color: #fff;
+  :root {
+    --primary: #2e5e82;
+  }
+
+  .logo-wrapper {
+    display:flex;
     padding: 0.5em;
   }
+
+  h2 {
+    text-align:center;
+  }
+
+  .navbar {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  .snow-logo-icon {
+    display: block;
+    width: 1em;
+    height: 1em;
+    margin-right: .25em;
+    fill: currentColor;
+}
 
   li {
     list-style: none;
@@ -24,7 +52,13 @@
 
   a {
     color: #fff;
-    padding: 0.25em;
-    margin:1em;
+    padding: 0.5em;
+    display: block;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--primary);
+    background: #fff;
   }
 </style>
