@@ -16,7 +16,7 @@ const resolve = require('resolve');
 const execa = require('execa');
 
 function startServer(projectPath) {
-  //projectPath =  '/Users/rajasegarchandran/www/super-rentals';
+  let _projectPath = projectPath;
 
   const app = express();
   expressWs(app);
@@ -33,19 +33,22 @@ function startServer(projectPath) {
   app.use('/build', express.static(path.join(__dirname, '..', 'public/build')));
 
   app.get('/project', (req,res) => {
-    const manifestPath =`${projectPath}/package.json`;
+    if(req.query.projectPath && req.query.projectPath !== 'null') {
+      _projectPath = req.query.projectPath;
+    }
+    const manifestPath =`${_projectPath}/package.json`;
     if(fs.existsSync(manifestPath)) {
       const manifest = require(manifestPath);
-      manifest.projectPath = projectPath;
+      manifest.projectPath = _projectPath;
       res.json(manifest);
     } else {
-      res.json({});
+      res.json({cwd: _projectPath});
     }
   });
 
   app.get('/assets', (req, res) => {
 
-    const files = getBuildAssets(projectPath);
+    const files = getBuildAssets(_projectPath);
 
     res.json(files);
   });
@@ -83,7 +86,7 @@ function startServer(projectPath) {
 
   app.get('/dependencies', async (req, res) => {
     const upgraded = await ncu.run();
-    const manifestPath =`${projectPath}/package.json`;
+    const manifestPath =`${_projectPath}/package.json`;
     const manifest = require(manifestPath);
     const { devDependencies, dependencies } = manifest;
     let deps;
@@ -126,14 +129,14 @@ function startServer(projectPath) {
         name: 'xterm-256color',
         cols: cols || 80,
         rows: rows || 24,
-        cwd: projectPath,
+        cwd: _projectPath,
         env: env,
         // encoding: USE_BINARY ? null : 'utf8'
         encoding:  'utf8'
       });
 
-      //term.write('clear\r');
-      //term.write('pwd\r');
+      term.write('clear\r');
+      term.write('pwd\r');
 
       console.log('Created terminalwith PID: ' + term.pid);
 
@@ -181,11 +184,6 @@ function startServer(projectPath) {
     });
     ws.on('message', function(msg) {
       term.write(msg);
-      // Change the project to new path
-      if(msg.includes('ember new')) {
-        const [,,newPath] = msg.split(' ');
-        projectPath += "/" + newPath;
-      }
     });
     ws.on('close', function () {
       term.kill();

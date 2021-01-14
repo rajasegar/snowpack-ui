@@ -2,35 +2,29 @@
   import { link } from 'svelte-routing';
 </script>
 <nav class="navbar">
-  <div class="logo-wrapper">
-  <svg class="snow-logo-icon" viewBox="0 0 640 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <g transform="translate(-1.000000, 0.000000)" fill-rule="nonzero">
-        <path d="M635.92,462.7 L347.92,14.7 C342.03,5.54 331.89,0 321,0 C310.11,0 299.97,5.54 294.08,14.7 L6.08,462.7 C-0.250773249,472.547007 -0.699487627,485.064987 4.91,495.34 C10.522069,505.612419 21.2945349,512 33,512 L609,512 C620.71,512 631.48,505.61 637.09,495.33 C642.699457,485.058495 642.250708,472.543372 635.92,462.7 Z M321,91.18 L406.39,224 L321,224 L257,288 L218.94,249.94 L321,91.18 Z" id="Shape"></path>
-      </g>
-    </svg>
-  <span>Snowpack-UI</span>
-  </div>
+  <h2>Snowpack-UI</h2>
+    <hr/>
     <ul>
-      <li><a use:link  href="/">Home</a></li>
-      <li><a use:link href="/init">Init</a></li>
-      <li><a use:link href="/dev">Dev</a></li>
-      <li><a use:link href="/build">Build</a></li>
+      <li><a use:link  href="/"><ion-icon name="home"></ion-icon>Home</a></li>
+      <!--<li><a use:link href="/init">Init</a></li>-->
+      <li><a use:link href="/dev"><ion-icon name="build-outline"></ion-icon>Dev</a></li>
+      <li><a use:link href="/build"><ion-icon name="cube-outline"></ion-icon>Build</a></li>
+      <li><a use:link href="/test"><ion-icon name="thermometer-outline"></ion-icon>Test</a></li>
+      <li><a use:link href="/format"><ion-icon name="brush-outline"></ion-icon>Format</a></li>
+      <li><a use:link href="/lint"><ion-icon name="bug-outline"></ion-icon>Lint</a></li>
+      <li><a use:link href="/install"><ion-icon name="add-circle-outline"></ion-icon>Install</a></li>
+    </ul>
+    <hr/>
+    <ul>
+      <li><a use:link href="/project-tasks"><ion-icon name="file-tray-stacked-outline"></ion-icon>Project Tasks</a></li>
     </ul>
   </nav>
 
 
 <style>
-  :root {
-    --primary: #2e5e82;
-  }
-
-  .logo-wrapper {
-    display:flex;
-    padding: 0.5em;
-  }
-
   h2 {
     text-align:center;
+    margin: 0.5em 0;
   }
 
   .navbar {
@@ -38,13 +32,11 @@
     color: #fff;
   }
 
-  .snow-logo-icon {
-    display: block;
-    width: 1em;
-    height: 1em;
-    margin-right: .25em;
-    fill: currentColor;
-}
+  hr {
+    background: #fff;
+    border: 1px solid #fff;
+    margin: 0.5em;
+  }
 
   li {
     list-style: none;
@@ -60,5 +52,10 @@
   a:hover {
     color: var(--primary);
     background: #fff;
+  }
+
+  ion-icon {
+    padding-right: .5em;
+    vertical-align: text-bottom;
   }
 </style>

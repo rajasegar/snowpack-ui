@@ -8,10 +8,10 @@ const { getSpeeds } = require('./downloadTime');
 
 module.exports = function(projectPath) {
 
-  return walkSync(`${projectPath}/dist`, { globs: ['**/*.js','**/*.css'] })
+  return walkSync(`${projectPath}/build/dist`, { globs: ['**/*.js','**/*.css'] })
     .map(file => {
 
-      const filePath = `${projectPath}/dist/${file}`;
+      const filePath = `${projectPath}/build/dist/${file}`;
       let contentsBuffer = fs.readFileSync(filePath);
       let output = {
         name: file,

@@ -1,10 +1,13 @@
 {
-  "name": "svelte-app",
-  "version": "1.0.0",
+  "name": "snowpack-ui",
+  "version": "0.0.0",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public"
+  },
+  "bin": {
+    "snowpack-ui": "./bin/cli.js"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^16.0.0",

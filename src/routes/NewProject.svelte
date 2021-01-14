@@ -1,75 +1,26 @@
 <script>
   import Terminal from '../Terminal.svelte';
   import { navigate } from 'svelte-routing';
+  import appTemplates from '../appTemplates';
 
   let term;
 
   let name;
   let template;
+  let customTemplate;
   let packageManager;
   let showForm = true;
+  let showCustomTemplate = false;
 
-  const appTemplates = [
-    {
-      name: 'React',
-      value: '@snowpack/app-template-react'
-    },
-    {
-      name: 'React-TypeScript',
-      value: '@snowpack/app-template-react-typescript'
-    },
-    {
-      name: 'Preact',
-      value: '@snowpack/app-template-preact'
-    },
-    {
-      name: 'Preact',
-      value: '@snowpack/app-template-preact-typescript'
-    },
-    {
-      name: 'Svelte',
-      value: '@snowpack/app-template-svelte'
-    },
-    {
-      name: 'Svelte-TypeScript',
-      value: '@snowpack/app-template-svelte-typescript'
-    },
-    {
-      name: 'Vue',
-      value: '@snowpack/app-template-vue'
-    },
-    {
-      name: 'Vue-TypeScript',
-      value: '@snowpack/app-template-vue-typescript'
-    },
-    {
-      name: 'Blank',
-      value: '@snowpack/app-template-blank'
-    },
-    {
-      name: 'Blank-TypeScript',
-      value: '@snowpack/app-template-blank-typescript'
-    },
-    {
-      name: '11ty',
-      value: '@snowpack/app-template-11ty'
-    },
-    {
-      name: 'lit-element',
-      value: '@snowpack/app-template-lit-element'
-    },
-    {
-      name: 'lit-element-TypeScript',
-      value: '@snowpack/app-template-lit-element-typescript'
-    },
-  ];
+
 
   function createProject() {
     let command;
+    const _template = template === 'other' ? customTemplate : template;
     if(packageManager === 'npm') {
-      command = `create-snowpack-app ${name} --template ${template}\r\n`; 
+      command = `create-snowpack-app ${name} --template ${_template}\r\n`; 
     } else {
-      command = `create-snowpack-app ${name} --template ${template} --use-${packageManager}\r\n`;
+      command = `create-snowpack-app ${name} --template ${_template} --use-${packageManager}\r\n`;
     }
 
     term.execute(command);
@@ -84,67 +35,82 @@
   }
 
   function gotoProject() {
-    navigate(`/?project=${name}`);
+    var paramsString = location.search;
+    var searchParams = new URLSearchParams(paramsString);
+    navigate(`/?projectPath=${searchParams.get('cwd')}/${name}`);
+  }
+
+  function updateTemplate() {
+
+    if(template === 'other') {
+      showCustomTemplate = true;
+    } else {
+      showCustomTemplate = false;
+    }
   }
 </script>
 
-<div class="new-page">
+<main class="new-page">
 <h1>Create New Snowpack Project</h1>
-<div class="grid-wrapper">
-  <div class="left-col">
     {#if showForm }
 <form>
-  <p>
-  <label>Project Name:</label>
-  <input type="text" bind:value={name}/>
-  </p>
-  <p>
-  <label>Template:</label>
-  <select bind:value={template}>
+  <div class="form-layout">
+  <div>
+  <label for="txtProjectName">Project Name:</label>
+  <input id="txtProjectName" type="text" bind:value={name} autofocus/>
+  </div>
+  <div>
+  <label for="lstTemplates">Template:</label>
+  <select id="lstTemplates" bind:value={template} on:change={updateTemplate}>
     {#each appTemplates as t}
       <option value={t.value}>{t.name}</option>
     {/each}
   </select>
-  </p>
-  <p>
-  <label>Package Manager:</label>
-  <select bind:value={packageManager}>
+  </div>
+    {#if showCustomTemplate}
+  <div>
+  <label for="txtTemplateName">Template Name:</label>
+  <input id="txtTemplateName" type="text" bind:value={customTemplate} autofocus/>
+  </div>
+    {/if}
+  <div>
+  <label for="lstPackMan">Package Manager:</label>
+  <select id="lstPackMan" bind:value={packageManager}>
     <option value="npm">npm</option>
     <option value="yarn">yarn</option>
     <option value="pnpm" selected>pnpm</option>
   </select>
-  </p>
-  <p>
-  <button type="button" class="button-primary" on:click={createProject}>Create Project</button>
-  </p>
+  </div>
+  </div>
+  <button type="button" class="button-primary btn-new-project" on:click={createProject}>Create Project</button>
 </form>
     {:else}
 
-  <button type="button" class="button-primary" on:click={gotoProject}>Take me to Project page</button>
+  <button type="button" class="button-primary btn-new-project" on:click={gotoProject}>Take me to Project page</button>
     {/if}
-  </div>
-  <div class="right-col">
     <Terminal task="new-project" bind:this={term} callback={projectCreated}/>
-  </div>
-</div>
-</div>
+</main>
 
 <style>
    .new-page {
-    background: var(--light-blue);
-    padding: 1em;
     height: 100vh;
    }
-  .grid-wrapper {
+  .form-layout {
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding-left: 1em;
   }
 
-  .left-col {
-    padding: 1em;
+  h1 {
+    text-align:center;
+    margin:.5em 0;
   }
 
-  .right-col {
-    padding: 1em;
+  .btn-new-project {
+    padding: 0.5em 2em;
+    font-size: 1.5em;
+    display: block;
+    margin: 1em auto;
   }
+
 </style>

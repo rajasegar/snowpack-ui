@@ -5,16 +5,19 @@
 
   let project = {
     projectPath: '',
-    dependencies: {}
+    dependencies: {},
+    devDependencies: {
+      snowpack: '0.0.0'
+    }
   };
 
   onMount(() => {
 
-    console.
-fetch('/project').then(res => res.json())
+    var paramsString = location.search;
+    var searchParams = new URLSearchParams(paramsString);
+    fetch(`/project?projectPath=${searchParams.get('projectPath')}`).then(res => res.json())
       .then(response => {
         project = response;
-        
       });
   });
 </script>
@@ -23,9 +26,16 @@ fetch('/project').then(res => res.json())
   <Navbar/>
 <main>
   <p>Project path: {project.projectPath}</p>
+  <p>Snowpack version: <strong>{project.devDependencies['snowpack']}</strong></p>
   <h2>Dependencies:</h2>
   <ul>
     {#each Object.keys(project.dependencies) as d}
+      <li>{d}</li>
+    {/each}
+  </ul>
+  <h2>Dev Dependencies:</h2>
+  <ul>
+    {#each Object.keys(project.devDependencies) as d}
       <li>{d}</li>
     {/each}
   </ul>
